@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1040717003916",
+    "firebase_url": "https://moaadtaskmanager2019.firebaseio.com",
+    "project_id": "moaadtaskmanager2019",
+    "storage_bucket": "moaadtaskmanager2019.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1040717003916:android:2b303c622e61d5c7",
+        "android_client_info": {
+          "package_name": "com.moaadfinally2019.moaadtaskmanager2019"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1040717003916-al4rujauip2u4pln7vb7o1g4kl5t9b86.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.moaadfinally2019.moaadtaskmanager2019",
+            "certificate_hash": "3d920b70f8988634c1ed27ef030165a28458403c"
+          }
+        },
+        {
+          "client_id": "1040717003916-lrjdmrb5a92l18c4eg9akgvtnr8jcmuf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMDjDvlIk339ViIc5ldHVrAx6PmttFS5Q"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1040717003916-lrjdmrb5a92l18c4eg9akgvtnr8jcmuf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
