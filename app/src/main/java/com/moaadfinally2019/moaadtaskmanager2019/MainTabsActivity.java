@@ -1,5 +1,6 @@
 package com.moaadfinally2019.moaadtaskmanager2019;
 
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -18,6 +19,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
+
+import com.moaadfinally2019.moaadtaskmanager2019.taskfragments.MyTasksFragment;
+import com.moaadfinally2019.moaadtaskmanager2019.taskfragments.ProfileFragment;
+import com.moaadfinally2019.moaadtaskmanager2019.taskfragments.TaskHistoryFragment;
 
 public class MainTabsActivity extends AppCompatActivity {
 
@@ -44,8 +49,10 @@ public class MainTabsActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
+       //build adapter
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
@@ -129,6 +136,10 @@ public class MainTabsActivity extends AppCompatActivity {
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
+    MyTasksFragment myTasksFragment;
+    TaskHistoryFragment historyFragment;
+    ProfileFragment profileFragment ;
+
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
@@ -137,15 +148,50 @@ public class MainTabsActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            {
+                if (position == 0) {
+                    if (myTasksFragment == null)
+                        myTasksFragment = new MyTasksFragment();
+                    return myTasksFragment;
+
+
+                }
+
+                if (position == 1) {
+                    if (historyFragment == null)
+                        historyFragment = new TaskHistoryFragment();
+                    return historyFragment;
+                }
+
+
+                if (position == 2) {
+                    if (profileFragment == null)
+                        profileFragment = new ProfileFragment();
+                    return profileFragment;
+                }
+
+
+                return PlaceholderFragment.newInstance(position + 1);
+            }
         }
 
         @Override
         public int getCount() {
             // Show 3 total pages.
             return 3;
+        }
+
+        @Nullable
+        @Override
+        public CharSequence getPageTitle(int position) {
+            if (position==0)
+                return "Tasks";
+            if (position==1)
+                return "History";
+            if (position==2)
+                return "Profile";
+            return "noname";
+
         }
     }
 }
