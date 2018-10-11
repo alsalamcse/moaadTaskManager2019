@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.moaadfinally2019.moaadtaskmanager2019.R;
 import com.moaadfinally2019.moaadtaskmanager2019.taskfragments.MyTasksFragment.OnListFragmentInteractionListener;
 import com.moaadfinally2019.moaadtaskmanager2019.taskfragments.dummy.DummyContent.DummyItem;
 
