@@ -1,17 +1,23 @@
 package com.moaadfinally2019.moaadtaskmanager2019;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class SignUpActivity extends AppCompatActivity {
+    //1.add auth to project
     private FirebaseAuth auth;// to make SignIn ,SignUp
     private FirebaseUser user;//user
     private TextView tvFirst;
@@ -38,4 +44,25 @@ public class SignUpActivity extends AppCompatActivity {
         });
 
     }
+
+
+    private void creatAcount(String email, String passw) {
+        auth.createUserWithEmailAndPassword(email,passw).addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful())
+                {
+                    Toast.makeText(SignUpActivity.this, "Authentication Successful.", Toast.LENGTH_SHORT).show();
+                    //updateUserProfile(task.getResult().getUser());
+                    finish();
+                }
+                else
+                {
+                    Toast.makeText(SignUpActivity.this, "Authentication failed."+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    task.getException().printStackTrace();
+                }
+            }
+        });
+    }
+
 }
