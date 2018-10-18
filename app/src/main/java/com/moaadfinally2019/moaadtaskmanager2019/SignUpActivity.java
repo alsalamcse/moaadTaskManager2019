@@ -20,8 +20,8 @@ public class SignUpActivity extends AppCompatActivity {
     //1.add auth to project
     private FirebaseAuth auth;// to make SignIn ,SignUp
     private FirebaseUser user;//user
-    private TextView tvFirst;
-    private TextView tvLast;
+    private TextView etFirst;
+    private TextView etLast;
     private EditText etPssword;
     private EditText etEmail;
     private Button btnSave;
@@ -34,16 +34,52 @@ public class SignUpActivity extends AppCompatActivity {
         etEmail = (EditText)findViewById(R.id.etEmail);
         etPssword = (EditText)findViewById(R.id.etPassword);
         btnSave = (Button) findViewById(R.id.btnSave);
-        tvFirst = findViewById(R.id.tvFirst);
-        tvLast = findViewById(R.id.tvLast);
+        etFirst = findViewById(R.id.tvFirst);
+        etLast = findViewById(R.id.tvLast);
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                dataHandler();
             }
         });
 
     }
+
+    /**
+     * get email and password from the failed and try to create new user
+     */
+
+    private void dataHandler()
+    {
+        boolean isok=true;//if all the fields filled well
+        String email=etEmail.getText().toString();
+        String passw=etPssword.getText().toString();
+        String fname=etFirst.getText().toString();
+        String lname=etLast.getText().toString();
+        if (email.length()<4 ||
+                email.indexOf('@')<0||
+                email.indexOf('.')<0);
+        {
+            etEmail.setError("Wrong Email");
+            isok=false;
+        }
+        if (passw.length()<8)
+        {
+            etPssword.setError("HAVE TO BE AT LEAST * CHAR");
+            isok=false;
+        }
+        if (isok)
+        {
+            creatAcount(email,passw);
+        }
+    }
+
+
+    /**
+     * create FireBase user using email and password
+     * @param email user email
+     * @param passw user password
+     */
 
 
     private void creatAcount(String email, String passw) {
