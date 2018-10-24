@@ -17,6 +17,9 @@ public class AddTaskActivity extends AppCompatActivity {
     private SeekBar skbrImportant;
     private SeekBar skbrNecessary;
     private Button btnSave;
+    private EditText etDueDate;
+    private Button btnDatePicker;
+
 
 
 
@@ -25,14 +28,22 @@ public class AddTaskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
         etTitle=findViewById(R.id.etTitle);
+        etDueDate=findViewById(R.id.etDueDate);
         etText=findViewById(R.id.etText);
         skbrImportant=findViewById(R.id.skbrImpotant);
         skbrNecessary=findViewById(R.id.skbrNeccesary);
         btnSave=findViewById(R.id.btnSave);
+        btnDatePicker=findViewById(R.id.btnDatePicker);
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+            }
+        });
+        btnDatePicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                
             }
         });
 

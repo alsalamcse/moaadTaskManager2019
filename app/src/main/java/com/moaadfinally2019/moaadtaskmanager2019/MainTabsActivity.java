@@ -1,5 +1,6 @@
 package com.moaadfinally2019.moaadtaskmanager2019;
 
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -69,6 +70,8 @@ public class MainTabsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                Intent i=new Intent(getApplicationContext(),AddTaskActivity.class);
+                startActivity(i);
             }
         });
 
