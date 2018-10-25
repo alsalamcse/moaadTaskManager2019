@@ -58,7 +58,7 @@ public class SignUpActivity extends AppCompatActivity {
         String lname=etLast.getText().toString();
         if (email.length()<4 ||
                 email.indexOf('@')<0||
-                email.indexOf('.')<0);
+                email.indexOf('.')<0)
         {
             etEmail.setError("Wrong Email");
             isok=false;
