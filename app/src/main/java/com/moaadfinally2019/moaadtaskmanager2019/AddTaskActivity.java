@@ -23,6 +23,7 @@ public class AddTaskActivity extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +38,7 @@ public class AddTaskActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                dataHandler();
             }
         });
         btnDatePicker.setOnClickListener(new View.OnClickListener() {
@@ -47,6 +48,27 @@ public class AddTaskActivity extends AppCompatActivity {
             }
         });
 
+    }
+    private void dataHandler()
+    {
+        boolean isok=true;//if all the fields filled well
+        String text=etText.getText().toString();
+        String tittle=etTitle.getText().toString();
+        String Date=etDueDate.getText().toString();
+        int SeekbBar1 = skbrImportant.getProgress();
+        int SeekBar2 = skbrNecessary.getProgress();
+        if (text.length()<4 ||
+                text.indexOf('@')<0||
+                text.indexOf('.')<0)
+        {
+            etText.setError("HAVE TO BE AT LEAST 4 letter");
+            isok=false;
+        }
+        if (tittle.length()<8)
+        {
+            etTitle.setError("HAVE TO BE AT LEAST 4 letter");
+            isok=false;
+        }
     }
 
 }
