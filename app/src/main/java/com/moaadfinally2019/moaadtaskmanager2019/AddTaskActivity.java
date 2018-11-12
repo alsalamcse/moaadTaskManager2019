@@ -11,6 +11,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.moaadfinally2019.moaadtaskmanager2019.data.MyTask;
+
+import java.util.Date;
+
 public class AddTaskActivity extends AppCompatActivity {
     private EditText etTitle;
     private EditText etText;
@@ -54,7 +61,7 @@ public class AddTaskActivity extends AppCompatActivity {
         boolean isok=true;//if all the fields filled well
         String text=etText.getText().toString();
         String tittle=etTitle.getText().toString();
-        String Date=etDueDate.getText().toString();
+        String date=etDueDate.getText().toString();
         int SeekbBar1 = skbrImportant.getProgress();
         int SeekBar2 = skbrNecessary.getProgress();
         if (text.length()<4 ||
@@ -68,6 +75,36 @@ public class AddTaskActivity extends AppCompatActivity {
         {
             etTitle.setError("HAVE TO BE AT LEAST 4 letter");
             isok=false;
+        }
+        if (text.length()==0)
+        {
+            etText.setError("Text can not be empty");
+            isok=false;
+
+        }
+        if (isok)
+        {
+            MyTask task=new MyTask();
+            task.setCreatedAt(new Date());
+            task.setDueDate(new Date(date));
+            task.setText(text);
+            task.setTitle(tittle);
+            task.setImportant(skbrImportant.getProgress());
+            task.setNecessary(skbrNecessary.getProgress());
+
+            FirebaseAuth auth=FirebaseAuth.getInstance();
+            task.setOwner(auth.getCurrentUser().getEmail());
+
+
+            DatabaseReference reference= FirebaseDatabase.getInstance().getReference();
+
+
+            String key=reference.child("MyTasks").push().getKey();
+            task.setKey(key);
+
+
+
+            reference.child("MyTasks").child()
         }
     }
 
