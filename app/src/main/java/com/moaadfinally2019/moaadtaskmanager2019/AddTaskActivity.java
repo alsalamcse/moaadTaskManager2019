@@ -4,13 +4,17 @@
 
 package com.moaadfinally2019.moaadtaskmanager2019;
 
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -44,6 +48,7 @@ public class AddTaskActivity extends AppCompatActivity {
         btnDatePicker=findViewById(R.id.btnDatePicker);
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
+
             public void onClick(View view) {
                 dataHandler();
             }
@@ -60,22 +65,15 @@ public class AddTaskActivity extends AppCompatActivity {
     {
         boolean isok=true;//if all the fields filled well
         String text=etText.getText().toString();
-        String tittle=etTitle.getText().toString();
+        String title=etTitle.getText().toString();
         String date=etDueDate.getText().toString();
         int SeekbBar1 = skbrImportant.getProgress();
         int SeekBar2 = skbrNecessary.getProgress();
-        if (text.length()<4 ||
-                text.indexOf('@')<0||
-                text.indexOf('.')<0)
+        if (title.length() == 0)
         {
-            etText.setError("HAVE TO BE AT LEAST 4 letter");
-            isok=false;
+            etTitle.setError("Tittle can not be empty");
         }
-        if (tittle.length()<8)
-        {
-            etTitle.setError("HAVE TO BE AT LEAST 4 letter");
-            isok=false;
-        }
+
         if (text.length()==0)
         {
             etText.setError("Text can not be empty");
@@ -88,7 +86,7 @@ public class AddTaskActivity extends AppCompatActivity {
             task.setCreatedAt(new Date());
             task.setDueDate(new Date(date));
             task.setText(text);
-            task.setTitle(tittle);
+            task.setTitle(title);
             task.setImportant(skbrImportant.getProgress());
             task.setNecessary(skbrNecessary.getProgress());
 
@@ -102,9 +100,20 @@ public class AddTaskActivity extends AppCompatActivity {
             String key=reference.child("MyTasks").push().getKey();
             task.setKey(key);
 
+            reference.child("MyTasks").child(key).setValue(task).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful())
+                    {
+                        Toast.makeText(AddTaskActivity.this,"Add Successful",Toast.LENGTH_LONG).show();
+                    }
+                    else
+                    {
+                        Toast.makeText(AddTaskActivity.this,"Add Failed",Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
 
-
-            reference.child("MyTasks").child()
         }
     }
 
