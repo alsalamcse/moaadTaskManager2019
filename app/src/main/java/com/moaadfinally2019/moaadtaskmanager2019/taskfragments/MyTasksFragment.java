@@ -10,10 +10,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.moaadfinally2019.moaadtaskmanager2019.R;
+import com.moaadfinally2019.moaadtaskmanager2019.data.MyTask;
 import com.moaadfinally2019.moaadtaskmanager2019.taskfragments.dummy.DummyContent;
 import com.moaadfinally2019.moaadtaskmanager2019.taskfragments.dummy.DummyContent.DummyItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -61,6 +68,25 @@ public class MyTasksFragment extends Fragment {
         return view;
     }
 
+    private List<MyTask>readTasks()
+    {
+        ArrayList<MyTask> myTasks=null;
+        //reference top the database root
+        DatabaseReference reference= FirebaseDatabase.getInstance().getReference();
+
+        reference.child("MyTasks").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        return myTasks;
+    }
 
     @Override
     public void onAttach(Context context) {
